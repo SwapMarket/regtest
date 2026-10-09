@@ -60,6 +60,13 @@ x-services:
 
   base-cln: &base-cln
     image: ${CLN_IMAGE}
+    # Built locally when the image is missing, so no registry is needed
+    build:
+      context: ./images/c-lightning-plugins
+      args:
+        CLN_VERSION: ${CLN_VERSION}
+        CLN_SHA256: ${CLN_SHA256}
+        HOLD_VERSION: ${HOLD_VERSION}
     restart: always
     user: '${UID:-1000}:${GID:-1000}'
     depends_on:
