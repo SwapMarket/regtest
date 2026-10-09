@@ -70,7 +70,9 @@ NGINX_VERSION = BuildArgument(
     value="alpine",
 )
 
-CLN_VERSION = "26.06.1"
+ENV = load_env_file(Path(__file__).parent / ".env")
+
+CLN_VERSION = ENV["CLN_VERSION"]
 ELECTRS_VERSION = "new-index-6d182d"
 
 IMAGES: dict[str, Image] = {
@@ -103,7 +105,7 @@ IMAGES: dict[str, Image] = {
             UBUNTU_VERSION,
             BuildArgument(
                 name="ARKD_IMAGE",
-                value=load_env_file(Path(__file__).parent / ".env").get("ARKD_IMAGE"),
+                value=ENV.get("ARKD_IMAGE"),
             ),
         ],
     ),
@@ -112,8 +114,16 @@ IMAGES: dict[str, Image] = {
         arguments=[
             UBUNTU_VERSION,
             BuildArgument(
+                name="CLN_VERSION",
+                value=CLN_VERSION,
+            ),
+            BuildArgument(
+                name="CLN_SHA256",
+                value=ENV["CLN_SHA256"],
+            ),
+            BuildArgument(
                 name="HOLD_VERSION",
-                value="v0.3.3",
+                value=ENV["HOLD_VERSION"],
             ),
             BuildArgument(
                 name="CLNURL_VERSION",
