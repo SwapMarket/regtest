@@ -31,7 +31,7 @@ RUN curl -fsSL -o cln.tar.xz \
 
 # Download hold plugin
 WORKDIR /hold
-RUN curl -fsSL https://github.com/BoltzExchange/hold/releases/download/${HOLD_VERSION}/hold-linux-amd64.tar.gz -o hold.tar.gz
+RUN curl -fsSL https://github.com/SwapMarket/hold/releases/download/${HOLD_VERSION}/hold-linux-amd64.tar.gz -o hold.tar.gz
 RUN tar -xvf hold.tar.gz && mv build/hold-linux-amd64 hold
 
 # Download clnurl plugin
